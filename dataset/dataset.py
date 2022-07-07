@@ -10,6 +10,7 @@ class Dataset(object):
         self.d, self.N = self.X.shape # X is a sparse matrix of shape (nb_features, nb_samples)
         self.seed = seed
         self.rs = np.random.RandomState(seed=seed)
+        self.proba_coord = None 
 
     def truncate(self, N, start):
         if N < self.N:
@@ -39,3 +40,16 @@ class Dataset(object):
         loc_N = int(data_copy.N /comm_size)
         data_copy.truncate(loc_N, rank * loc_N)
         return data_copy
+
+    @staticmethod
+    @njit
+    def _precompute_probas(indices_list, d, N):
+        proba_coord = np.zeros((d,))
+        for nz_index in indices_list:
+            proba_coord[nz_index] += 1
+        return proba_coord / N
+
+    def precompute_probas(self):
+        if self.proba_coord is None: 
+            self.proba_coord = Dataset._precompute_probas(self.X.T.indices, self.d, self.N)
+        return self.proba_coord

@@ -8,7 +8,7 @@ import os
 class Solver(object):
     def __init__(self, name="Main", model=None, dataset=None, seed=0, nb_epochs=0, 
     inner_precision=1e-07, max_inner_repeats=1, tb_dir=None, tb_min_error=0., 
-    timestamp="", error_dataset=None, error_model=None, **kwargs):
+    timestamp=0, error_dataset=None, error_model=None,shared_dataset=None, **kwargs):
         self.name = name
         self.model = model
         self.dataset = dataset
@@ -23,7 +23,7 @@ class Solver(object):
         self.x = np.zeros(dataset.d)
         self.seed = seed
         self.rs = np.random.RandomState(seed=seed)
-        
+        self.shared_dataset = shared_dataset
         self.iteration_number = 1
 
         self.inner_precision = inner_precision

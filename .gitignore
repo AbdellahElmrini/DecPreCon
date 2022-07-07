@@ -2,3 +2,7 @@ __pycache__
 *.prof
 cache
 configs
+logs.log
+.DS_Store
+rcv1_test.binary
+results/

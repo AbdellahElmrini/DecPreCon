@@ -16,3 +16,6 @@ class Edge(object):
 
     def is_local(self):
         return False
+
+class GraphEdge(Edge):
+    pass

@@ -44,6 +44,7 @@ rank = comm.Get_rank()
 # Set up loggers
 logging.basicConfig(level=logging.INFO, filename='logs.log')
 log = logging.getLogger(f"Main {rank}")
+log.info("Program Starting ")
 
 # Load model 
 model = LogisticRegression(**model_args)
@@ -72,7 +73,7 @@ for solver_name, solver_args in solvers:
     solver_class = AvailableSolvers.get(solver_name)
     solver = solver_class(name=solver_name, comm=comm,
                 model=model, error_model=model, graph=graph,
-                dataset=local_dataset, error_dataset=global_dataset,
+                dataset=local_dataset, error_dataset=global_dataset, shared_dataset = shared_dataset,
                 seed=args.seed, timestamp=filename, **algo_args, **solver_args)
 
     # Run algorithm

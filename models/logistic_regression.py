@@ -18,6 +18,11 @@ class LogisticRegression(object):
 
     def __init__(self, c=0.):
         self.c = c
+    
+    @staticmethod
+    @njit
+    def get_1d_gradient(x, y):
+        return - y / (1 + np.exp(y * x))
         
     def get_L(self, dataset):
         @njit 
