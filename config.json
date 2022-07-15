@@ -3,8 +3,8 @@
     "path_to_data": "breast-cancer.txt",
     "zero_based": false,
     "N": 10000,
-    "c": 1e-3,
-    "nb_epochs": 800,
+    "c": 1e-5,
+    "nb_epochs": 1600,
     "output_path": "results",
     "cache_path": "cache",
     "computation_time": 1,
@@ -13,8 +13,8 @@
     "plot": "True",
     "save_png" : "True",
     "solvers": [
-        ["GD", {"batch_factor": 0.02}], 
-        ["EXTRA", {"batch_factor": 0.02}],
-        ["DPC" , {"batch_factor" : 0.02, "delta" : 0.1}]
+        ["GD", {"batch_factor": 1.0}], 
+        ["EXTRA", {"batch_factor": 1.0}],
+        ["DPC" , {"batch_factor" : 1.0, "delta" : 0.1}]
     ]
 }
