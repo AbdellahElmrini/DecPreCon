@@ -6,3 +6,4 @@ logs.log
 .DS_Store
 rcv1_test.binary
 results/
+breast-cancer*

@@ -15,12 +15,12 @@ class Dpc(DistributedSolver):
         self.nb_nodes = self.comm.size
         self.y = np.zeros(self.x.shape)
         self.omega = np.zeros(self.x.shape)
-        self.step_size = 0.01 #. / (self.model.c + batch_factor * np.sum(self.model.get_smoothnesses(self.dataset))) # TODO calculate the real step size
+        self.step_size = 0.1 #. / (self.model.c + batch_factor * np.sum(self.model.get_smoothnesses(self.dataset))) # TODO calculate the real step size
         self.L_g = np.sum(self.model.get_smoothnesses(self.shared_dataset))
         # Here it's unclear which relative smoothness you assume. Is it before rescaling h? After rescaling h?
         # This changes a lot of things. If it's after rescaling then it should be related to the step-size
         # but I think it's before. 
-        self.L_r = 100. #self.L_g # TODO UPDATE to the real relative smoothness (or to a proxy)
+        self.L_r = 10. #self.L_g # TODO UPDATE to the real relative smoothness (or to a proxy)
         self.g = self.model.compute_error(self.x, self.shared_dataset)  # TODO 
         self.gr_g = self.model.get_gradient(self.x, self.shared_dataset)  # TODO 
         self.F = self.model.get_gradient(self.x, self.dataset) # TODO 
@@ -33,12 +33,13 @@ class Dpc(DistributedSolver):
         self.inner_epochs = inner_epochs
 
         C = self.L_r/2 
-        self.alpha = self.step_size*self.model.c/(2 * self.L_g*C ) # TODO verify alpha's expression
+        self.alpha = self.step_size*self.model.c/(2 * self.L_g * C ) # TODO verify alpha's expression
 
         # Adds regularization to the local problem solved.
         # The square comes from the fact that we consider D_h and not D_h / eta
 
-        # Should also try with some regularization. 
+        # Should also try with some regularization.
+        print(f"alpha: {self.alpha}, c: {self.model.c}, C: {C}, L_g: {self.L_g}")
         assert(self.step_size * self.alpha < self.model.c)
         self.local_solver.set_regularization(self.model.c + np.power(self.step_size, 2) / ( C * (self.model.c-self.step_size * self.alpha)))
 

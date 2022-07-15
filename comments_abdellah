@@ -1,0 +1,44 @@
+Trucs bizarres: EXTRA et GD ont l'air de galérer sur brest-cancer-rescaled (descendent puis remontent), chercher pourquoi. 
+
+
+end of page 1: separate on h_x, h_y and h_\lambda, and see that in this case you get the bound of L_h^x for \|y_{t+1} - y_\star\|^2 (and you don't care so much about the rest). 
+
+It's easy to see: no. Detail it. 
+
+Expression de L_{A_\alpha / h}: Vérifier que \alpha << 1. Ca devrait être le cas en général mais ça n'est pas nécessaire non plus. 
+
+Expression de \mu_{A_\alpha / h}: détailler pourquoi c'est ça, puis déballer en fonction de \alpha: \gamma \eta / 2 L_h
+
+We don't really use that alpha << 1, but rather that we can always bound the expression in this way (and it is tight for alpha << 1).
+
+
+Final iteration complexity: L_{A_\alpha / h} / \mu_{A_\alpha / h} = 
+
+\max(2 / \mu_r, \kappa_r, 2 L_r L_h / (gamma \eta)  , 4L_h / \gamma \eta). 
+
+Détailler le rate, car si on regarde uniquement Equation (4) alors le rate devrait simplement être égal à 1 / (\eta \mu_{A_\alpha/h}), et il ne me semble pas qu'on trouve (5) en appliquant ça. 
+
+D'ou vient le 1/\gamma dans ce cas?
+
+Quelles sont les conditions exactes sur \eta? Uniquement 1/L_r? Est-ce que c'est pas plutôt L_A_\alpha/h ? 
+
+
+Scale-free rates: not really necessary to use that, because we will actually select h such that L_r \approx 1 by taking h = g + \beta \| \|^2. Good to have anyway, but should be more explicit. 
+
+Iterations: need to detail why we get these iterations.
+
+It is really important to have all of this written down as cleanly as possible, because it helps coding and debugging. Moreover, all of this should be part of your internship report, so you will have to do it some day. The proofs should be readable by someone familiar with optimization but not familiar with this specific approach (Aymeric). 
+
+
+
+You should also write how we obtain the primal-dual problem. that we would like to solve.  
+
+Once you do that you should also write the alternate formulation in which we communicate "Bregman quantities" instead of Euclidean ones. 
+
+This should be the focus for the end of the internship: write a super clean theory + get working implementation for the primal-dual formulation with euclidean communications.
+
+It would also be great to get partial theory (for instance restricted to the quadratic case) + working implementation (ideally for the general case but not necessarily) for the "Bregman communications" (dual on g instead of \| \|^2) case. 
+
+ 
+
+
