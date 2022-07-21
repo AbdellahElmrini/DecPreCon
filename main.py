@@ -1,3 +1,4 @@
+from glob import glob
 from numba import njit
 import scipy.sparse as sparse
 import numpy as np
@@ -54,6 +55,9 @@ error_model = model.get_global(comm.size)
 global_dataset = LIBSVM_Loader(**data_args, seed=args.seed, rank=rank).load(**data_args, comm_size=comm.size)
 shared_dataset = global_dataset.get_truncated(comm.size, comm.size+1)
 local_dataset = global_dataset.get_truncated(rank, comm.size+1)
+
+global_dataset = global_dataset.get_truncated_basic(local_dataset.N*comm.size, 0) # Used to compute the error
+
 if rank > 0:
     global_dataset = None
 

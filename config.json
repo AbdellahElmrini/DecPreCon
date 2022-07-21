@@ -1,10 +1,9 @@
 {
     "seed": 0,
-    "path_to_data": "breast-cancer.txt",
+    "path_to_data": "breast-cancer_scale.txt",
     "zero_based": false,
-    "N": 10000,
     "c": 1e-5,
-    "nb_epochs": 1600,
+    "nb_epochs": 800,
     "output_path": "results",
     "cache_path": "cache",
     "computation_time": 1,

@@ -7,3 +7,5 @@ logs.log
 rcv1_test.binary
 results/
 breast-cancer*
+ijcnn1.t
+.DS_Store

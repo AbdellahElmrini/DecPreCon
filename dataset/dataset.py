@@ -41,6 +41,11 @@ class Dataset(object):
         data_copy.truncate(loc_N, rank * loc_N)
         return data_copy
 
+    def get_truncated_basic(self, N, start):
+        data_copy = Dataset(X=self.X, y=self.y, seed=self.seed)
+        data_copy.truncate(N, start)
+        return data_copy
+
     @staticmethod
     @njit
     def _precompute_probas(indices_list, d, N):
