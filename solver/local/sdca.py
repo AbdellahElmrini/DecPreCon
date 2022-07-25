@@ -67,7 +67,7 @@ class SDCA(Solver):
                                     self.model.get_1d_gradient
                                     )
             self.x[self.zero_mask] = - grad[self.zero_mask] / self.lam
-            self.subproblem_grad_norm = np.linalg.norm(self.model.get_gradient(self.x, self.dataset) + grad + (self.lam - self.model.c) * self.x)
+            self.subproblem_grad_norm = np.linalg.norm(self.model.get_gradient_without_reg(self.x, self.dataset) + grad + self.lam * self.x)
             inner_repeats_count += 1
         # Safer to copy (although it is more expensive)
         return np.copy(self.x)

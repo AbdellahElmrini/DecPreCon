@@ -92,7 +92,9 @@ if rank == 0:
     x_comm = [solver.x_comm for solver in run_solvers]
     x_comp = [solver.x_comp for solver in run_solvers]
 
-    for metric, m_name in [(x_time, "time"), (x_comm, "comm"), (x_comp, "comp")]:
+
+    # for metric, m_name in [(x_time, "time"), (x_comm, "comm"), (x_comp, "comp")]:
+    for metric, m_name in [(x_time, "time")]:
         plotter = Plotter(filename=args.plotter_path)
         
         for solver_metric, solver, (_, solver_args) in zip(metric, run_solvers, solvers): 
@@ -102,7 +104,7 @@ if rank == 0:
 
         #_metric plots and saves results to disk
         plotter.plot(show=args.plot, xlabel=m_name)
-        plotter.save(filename=filename, output_path=args.output_path, suffix=m_name, save_png=args.save_png)
+        # plotter.save(filename=filename, output_path=args.output_path, suffix=m_name, save_png=args.save_png)
     
-    args_parser.save_config(filename=filename, output_path=args.output_path)
+    # args_parser.save_config(filename=filename, output_path=args.output_path)
     log.info("Finished execution")

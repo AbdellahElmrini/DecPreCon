@@ -10,13 +10,15 @@ class GD(Solver):
         self.set_regularization(self.model.c)
 
     def set_regularization(self, lam):
-        self.step_size = 1. / (self.L + lam) 
+        self.step_size = 1.0 / (self.L + lam) 
         self.lam = lam
 
     def run_step(self, grad, nb_iters):
-        for _ in range(nb_iters):
-            self.x = (1 - self.step_size * self.lam) * self.x - self.step_size * (self.model.get_gradient(self.x, self.dataset) + grad)
-        self.subproblem_grad_norm = np.linalg.norm(self.model.get_gradient(self.x, self.dataset) + grad + (self.lam - self.model.c) * self.x)
+        # print(np.linalg.norm(self.model.get_gradient_without_reg(self.x, self.dataset) + grad + self.lam * self.x))
+        for _ in range(10 * nb_iters):
+            self.x = (1 - self.step_size * self.lam) * self.x - self.step_size * (self.model.get_gradient_without_reg(self.x, self.dataset) + grad)
+        self.subproblem_grad_norm = np.linalg.norm(self.model.get_gradient_without_reg(self.x, self.dataset) + grad + self.lam * self.x)
+        # print(self.subproblem_grad_norm)
         return np.copy(self.x)
 
 class AGD(Solver):   
@@ -41,7 +43,7 @@ class AGD(Solver):
             if self.subproblem_grad_norm < self.inner_precision:
                 break 
             for _ in range(nb_epochs):
-                subproblem_grad = self.model.get_gradient(self.x, self.dataset) + grad + (self.lam - self.model.c) * self.x
+                subproblem_grad = self.model.get_gradient_without_reg(self.x, self.dataset) + grad + self.lam * self.x
                 y_new = self.x - self.step_size * subproblem_grad 
                 self.x = (1 + self.beta) * y_new - self.beta * self.y 
                 self.y = y_new

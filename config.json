@@ -3,7 +3,7 @@
     "path_to_data": "breast-cancer_scale.txt",
     "zero_based": false,
     "c": 1e-5,
-    "nb_epochs": 800,
+    "nb_epochs": 90000,
     "output_path": "results",
     "cache_path": "cache",
     "computation_time": 1,

@@ -48,9 +48,9 @@ class Parser(object):
 
     def get_algo_args(self):
         parser = argparse.ArgumentParser('Arguments for the solver')
-        parser.add_argument(
-            '--inner_epochs', type=int, default=10, help='DEPRECATED - Number of local solver epochs'
-        )
+        # parser.add_argument(
+        #     '--inner_epochs', type=int, default=1000, help=' - Number of local solver epochs'
+        # )
         parser.add_argument(
             '--tb_dir', type=str, default=None, help='Where to log tensorboard'
         )
