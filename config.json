@@ -1,19 +1,19 @@
 {
     "seed": 0,
-    "path_to_data": "breast-cancer_scale.txt",
+    "path_to_data": "mg_scale.txt",
     "zero_based": false,
     "c": 1e-5,
-    "nb_epochs": 90000,
+    "nb_epochs": 9000,
     "output_path": "results",
     "cache_path": "cache",
     "computation_time": 1,
     "communication_time": 10000,
-    "graph": "complete",
+    "graph": "ring",
     "plot": "True",
     "save_png" : "True",
     "solvers": [
         ["GD", {"batch_factor": 1.0}], 
         ["EXTRA", {"batch_factor": 1.0}],
-        ["DPC" , {"batch_factor" : 1.0, "delta" : 0.1}]
+        ["DPC-R" , {"batch_factor" : 1.0}]
     ]
 }

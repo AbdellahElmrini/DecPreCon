@@ -1,4 +1,5 @@
 from glob import glob
+from models.linear_regression import LinearRegression
 from numba import njit
 import scipy.sparse as sparse
 import numpy as np
@@ -48,7 +49,7 @@ log = logging.getLogger(f"Main {rank}")
 log.info("Program Starting ")
 
 # Load model 
-model = LogisticRegression(**model_args)
+model = LinearRegression(**model_args)
 error_model = model.get_global(comm.size)
 
 # Load dataset

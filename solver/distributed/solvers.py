@@ -3,7 +3,7 @@ import logging
 from solver.distributed.extra import Extra, Extra_Cheb
 from solver.distributed.nids import Nids
 from solver.distributed.gd import GD
-from solver.distributed.dpc import Dpc
+from solver.distributed.dpc import Dpc, Dpc_regression
 
 class AvailableSolvers(object):
     solvers  = {
@@ -12,6 +12,7 @@ class AvailableSolvers(object):
                 "NIDS": Nids,
                 "DPC": Dpc,
                 "GD": GD,
+                "DPC-R":Dpc_regression
                 }
 
     log = logging.getLogger("Args")
